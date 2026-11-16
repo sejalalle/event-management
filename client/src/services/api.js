@@ -1,5 +1,6 @@
 
-const API_BASE = "/api";
+const API_BASE = import.meta.env.VITE_API_URL || "https://event-management-v34x.onrender.com/api";
+
 
 // Common API request function
 async function apiRequest(endpoint, options = {}) {
