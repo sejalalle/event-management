@@ -9,19 +9,13 @@ const {
   deleteEvent,
 } = require("../controllers/eventController");
 
-// GET all events
-router.get("/", getEvents);
+const { protect, adminOnly } = require("../middleware/authMiddleware");
 
-// GET one event
+router.get("/", getEvents);
 router.get("/:id", getEventById);
 
-// CREATE an event
-router.post("/", createEvent);
-
-// UPDATE an event
-router.put("/:id", updateEvent);
-
-// DELETE an event
-router.delete("/:id", deleteEvent);
+router.post("/", protect, adminOnly, createEvent);
+router.put("/:id", protect, adminOnly, updateEvent);
+router.delete("/:id", protect, adminOnly, deleteEvent);
 
 module.exports = router;
